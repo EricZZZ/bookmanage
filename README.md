@@ -13,3 +13,4 @@ sqlite
 | springdoc              | 1.7.0  | https://springdoc.org/             |
 | mybatis-plus-generator | 3.5.3  | https://baomidou.com/pages/779a6e/ |
 
+建表语句全由`GPT-3.5-TURBO`模型生成，SQlite 库文件和建表语句在 `db`目录下。
