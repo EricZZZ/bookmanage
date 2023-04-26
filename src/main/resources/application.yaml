@@ -1,0 +1,10 @@
+server:
+  port: 8989 # 端口号
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:sqlite:G:/demo/my-java-project/bookmanage/db/bookmanageDB.db # 创建的sqlite数据库所在路径
+    username: # 因为没有用户名和密码，所以这两个参数就没有值
+    password:
+    driver-class-name: org.sqlite.JDBC
