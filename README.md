@@ -1,9 +1,10 @@
 练手小项目
+IDE：VSCode，[Codeium](https://codeium.com/) 辅助
 
 技术选型
-jdk 1.8
-maven
-sqlite
+1. jdk 1.8
+2. maven
+3. sqlite
 
 使用框架
 | 框架                   | 版本   | 官网                               |
