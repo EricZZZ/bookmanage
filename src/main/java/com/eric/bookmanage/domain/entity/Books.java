@@ -2,12 +2,11 @@ package com.eric.bookmanage.domain.entity;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -23,7 +22,7 @@ public class Books implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @JsonIgnore
+    @Schema(title = "书id")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
@@ -36,11 +35,11 @@ public class Books implements Serializable {
     private String author;
 
     @Schema(title = "价格")
-    @NotBlank(message = "价格不能为空")
+    @DecimalMin(value = "0.00", message = "价格不能小于0")
     private Double price;
 
     @Schema(title = "发布时间")
-    @Past(message = "发布时间不能小于当前时间")
+    @NotBlank(message = "发布时间不能为空")
     private String publishDate;
 
     @Schema(title = "描述")

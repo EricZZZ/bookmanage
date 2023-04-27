@@ -21,7 +21,7 @@ public class GeneratorCode {
 
         FastAutoGenerator.create(DATA_SOURCE_CONFIG)
                 // 全局配置
-                .globalConfig((scanner, builder) -> builder.author(scanner.apply("请输入作者名称")).outputDir("G:/demo/my-java-project/bookmanage/src/main/java"))
+                .globalConfig((scanner, builder) -> builder.author(scanner.apply("请输入作者名称")).outputDir("G:/demo/my-java-project/bookmanage/test"))
                 // 包配置
                 .packageConfig((scanner, builder) -> builder.parent(scanner.apply("请输入包名")))
                 // 策略配置
