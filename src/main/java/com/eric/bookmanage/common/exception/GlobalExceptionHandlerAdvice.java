@@ -3,6 +3,8 @@ package com.eric.bookmanage.common.exception;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.ConstraintViolationException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -54,13 +56,34 @@ public class GlobalExceptionHandlerAdvice {
         return Response.fail(SystemErrorType.PARAM_TYPE_ERROR, e.getMessage());
     }
 
+    /**
+     * 参数校验异常
+     * 
+     * @author EricZhao
+     * @date 2022/4/28
+     * @since 1.0
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(value = org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(value = org.springframework.http.HttpStatus.BAD_REQUEST)
     public Response handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         log.error("{}", e.getMessage(), e);
         List<String> list = e.getBindingResult().getFieldErrors().stream()
-                .map(t -> "[" + t.getField() + "]" + t.getDefaultMessage()).collect(Collectors.toList());
+                .map(t -> "【" + t.getField() + "】" + t.getDefaultMessage()).collect(Collectors.toList());
         return Response.fail(SystemErrorType.PARAM_VALID_ERROR, list.get(0));
+    }
+
+    /**
+     * 处理 参数校验不通过 异常
+     * 
+     * @author EricZhao
+     * @date 2022/4/28
+     * @since 1.0
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(value = org.springframework.http.HttpStatus.BAD_REQUEST)
+    public Response handleConstraintViolationException(ConstraintViolationException e) {
+        log.error("{}", e.getMessage(), e);
+        return Response.fail(SystemErrorType.PARAM_VALID_ERROR, e.getMessage());
     }
 
     /**

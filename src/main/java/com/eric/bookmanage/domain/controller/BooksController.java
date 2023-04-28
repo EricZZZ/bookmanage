@@ -16,8 +16,13 @@ import com.eric.bookmanage.common.Response;
 import com.eric.bookmanage.domain.entity.Books;
 import com.eric.bookmanage.domain.service.IBooksService;
 import com.eric.bookmanage.domain.validation.books.NotConflictBooks;
+import com.eric.bookmanage.domain.validation.books.UniqueBooks;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 /**
@@ -31,6 +36,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/books")
 @Tag(name = "BooksController", description = "书籍管理")
+@Validated
 public class BooksController {
 
     private static final Logger log = LoggerFactory.getLogger(BooksController.class);
@@ -40,20 +46,35 @@ public class BooksController {
 
     @Operation(summary = "新增书籍")
     @PostMapping(produces = "application/json")
-    public Response addBook(@Validated @RequestBody Books books) {
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "成功",content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))}),
+        @ApiResponse(responseCode = "400", description = "参数错误",content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))}),
+        @ApiResponse(responseCode = "500", description = "服务器错误",content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))})
+    })
+    public Response addBook(@UniqueBooks @Validated @RequestBody Books books) {
         booksService.save(books);
         return Response.success();
     }
 
     @Operation(summary = "更新书籍")
     @PutMapping(produces = "application/json")
-    public Response editBook(@Validated @NotConflictBooks @RequestBody Books books) {
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "成功",content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))}),
+        @ApiResponse(responseCode = "400", description = "参数错误",content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))}),
+        @ApiResponse(responseCode = "500", description = "服务器错误",content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))})
+    })
+    public Response editBook(@NotConflictBooks @Validated @RequestBody Books books) {
         booksService.updateById(books);
         return Response.success();
     }
 
     @Operation(summary = "获取书籍")
     @GetMapping(value = "/{id}", produces = "application/json")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "成功",content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))}),
+        @ApiResponse(responseCode = "400", description = "参数错误",content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))}),
+        @ApiResponse(responseCode = "500", description = "服务器错误",content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Response.class))})
+    })
     public Response getBook(@PathVariable Integer id) {
         log.info("获取书籍id:{}", id);
         return Response.success(booksService.getById(id));

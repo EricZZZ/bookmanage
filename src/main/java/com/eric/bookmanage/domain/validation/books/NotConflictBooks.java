@@ -11,7 +11,8 @@ import javax.validation.Payload;
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD,ElementType.METHOD,ElementType.PARAMETER,ElementType.TYPE})
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE,
+        ElementType.TYPE_USE })
 @Constraint(validatedBy = BooksValidation.NotConflictBooksValidator.class)
 public @interface NotConflictBooks {
     String message() default "标题、作者、出版日期产生重复";
