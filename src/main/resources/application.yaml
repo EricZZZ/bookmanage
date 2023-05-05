@@ -8,3 +8,9 @@ spring:
     username: # 因为没有用户名和密码，所以这两个参数就没有值
     password:
     driver-class-name: org.sqlite.JDBC
+
+bookmanage:
+  jwt:
+    header: Authorization
+    expire: 604800
+    secret: bookmanage

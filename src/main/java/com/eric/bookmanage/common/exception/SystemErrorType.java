@@ -18,7 +18,12 @@ public enum SystemErrorType implements ErrorType {
     INVALID_TOKEN("600000", "无效token"),
     UPLOAD_FILE_SIZE_LIMIT("020010", "上传文件大小超过限制"),
 
-    DUPLICATE_PRIMARY_KEY("030000", "唯一键冲突");
+    DUPLICATE_PRIMARY_KEY("030000", "唯一键冲突"),
+
+    LOGGIN_NAME_OR_PASSWORD_FAILURE("040000", "用户名或密码错误"),
+    TOKEN_EXPIRED("600001", "token过期"),
+    TOKEN_VERIFY_FAILURE("600002", "请先登录"),
+    ;
 
     /**
      * 错误类型码

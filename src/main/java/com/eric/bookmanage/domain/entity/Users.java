@@ -1,8 +1,9 @@
 package com.eric.bookmanage.domain.entity;
 
+import java.io.Serializable;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 
 /**
  * <p>
@@ -17,7 +18,7 @@ public class Users implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String username;
 
@@ -29,11 +30,11 @@ public class Users implements Serializable {
 
     private String address;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,12 +81,12 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "Users{" +
-            "id = " + id +
-            ", username = " + username +
-            ", password = " + password +
-            ", email = " + email +
-            ", phoneNumber = " + phoneNumber +
-            ", address = " + address +
-        "}";
+                "id = " + id +
+                ", username = " + username +
+                ", password = " + password +
+                ", email = " + email +
+                ", phoneNumber = " + phoneNumber +
+                ", address = " + address +
+                "}";
     }
 }
