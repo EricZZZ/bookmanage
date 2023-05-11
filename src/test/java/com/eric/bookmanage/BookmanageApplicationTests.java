@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.eric.bookmanage.common.tools.JwtUtils;
 import com.eric.bookmanage.domain.entity.Users;
 import com.eric.bookmanage.domain.mapper.UsersMapper;
 
@@ -16,6 +17,9 @@ class BookmanageApplicationTests {
 
 	@Autowired
 	private UsersMapper usersMapper;
+
+	@Autowired
+	private JwtUtils jwtUtils;
 
 	@Test
 	void contextLoads() {
@@ -27,6 +31,11 @@ class BookmanageApplicationTests {
 		List<Users> userList = usersMapper.selectList(null);
 		assertEquals(1, userList.size(), "userList size is not 1");
 		userList.forEach(System.out::println);
+	}
+
+	@Test
+	public void generateToken() {
+		System.out.println(jwtUtils.generateToken("eric"));
 	}
 
 }
