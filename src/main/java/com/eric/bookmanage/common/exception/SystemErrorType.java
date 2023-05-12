@@ -22,7 +22,7 @@ public enum SystemErrorType implements ErrorType {
 
     LOGGIN_NAME_OR_PASSWORD_FAILURE("040000", "用户名或密码错误"),
     TOKEN_EXPIRED("600001", "token过期"),
-    TOKEN_VERIFY_FAILURE("600002", "token验证失败"),
+    TOKEN_VERIFY_FAILURE("600002", "token 验证失败"),
     ;
 
     /**
